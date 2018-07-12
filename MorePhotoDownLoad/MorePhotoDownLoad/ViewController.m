@@ -47,7 +47,6 @@
     
 }
     
-    
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -77,8 +76,12 @@
         
         //获取沙盒路径
         NSString *caches = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-        //获取url最后一个path
-        NSString *fileName = [imageID lastPathComponent];
+        
+        //NSString *fileName = [imageID lastPathComponent]; 获取url最后一个path
+        NSArray *fileNameArray = [imageID componentsSeparatedByString:@".com"];
+        NSString *strurl = [fileNameArray lastObject];
+        NSString *fileName = [strurl stringByReplacingOccurrencesOfString:@"/" withString:@"TY"];//将/替换成TY
+        
         //拼接图片地址
         NSString *imagePath = [caches stringByAppendingPathComponent:fileName];
         //NSLog(@"获取沙盒路径为:%@",imagePath);
